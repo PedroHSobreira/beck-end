@@ -1,0 +1,190 @@
+<x-layout titulo="Editar Docentes - Senac">
+    <div class="container-xl py-4 shadow">
+        <!-- Abas -->
+        <ul class="nav nav-pills gap-2 mb-4">
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/dashboardAdm"><i class="bi bi-speedometer2 me-1"></i>
+                    Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/cursos"><i class="bi bi-clipboard2-check me-1"></i> Cursos</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary active " href="/unidadesCurriculares"><i class="bi bi-people me-1"></i>
+                    UCs</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/docentes"><i class="bi bi-calendar2-event me-1"></i> Docentes</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/alunos"><i class="bi bi-graph-up-arrow me-1"></i> Alunos</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/turmas"><i class="bi bi-graph-up-arrow me-1"></i> Turmas</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/relatorios"><i class="bi bi-graph-up-arrow me-1"></i>
+                    Relatórios</a>
+            </li>
+        </ul>
+
+        <!-- Conteudo Principal -->
+
+        <section class="container-fluid">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold">Monitores de Educação Profissional</h2>
+                    <p class="text-muted ">Editar o docente cadastrado</p>
+                </div>
+
+                <a href="/docentes.html" class="text-end btn btn-primary">
+                    <i class="bi bi-arrow-left me-1"></i> Voltar
+                </a>
+            </div>
+
+
+            <form action="../atualizar/{{$dado->id}}" method="POST">
+                <div class="modal-body">
+                    
+                    <div class="row">
+
+                        <!-- Nome -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Nome Completo *</label>
+                            <input type="text" name="nome" class="form-control" placeholder="Nome completo do docente" value="{{$dado->nome}}"
+                                required>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <!-- CPF -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">CPF *</label>
+                            <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00" value="{{$dado->cpf}}" required>
+                        </div>
+
+                        <!-- Data de Nascimento -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Data de Nascimento *</label>
+                            <input type="date" name="data_nascimento" class="form-control" value="{{$dado->data_nascimento}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Endereço -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Endereço *</label>
+                            <input type="text" name="endereco" class="form-control"
+                                placeholder="Rua, número, bairro, cidade" value="{{$dado->endereco}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Telefone -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Telefone *</label>
+                            <input type="text" name="telefone" class="form-control" placeholder="(00) 00000-0000" value="{{$dado->telefone}}" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Email *</label>
+                            <input type="text" name="email" class="form-control" placeholder="email@senacsp.edu.br" value="{{$dado->email}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Formação -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Formação (Graduação)</label>
+                            <input type="text" name="formacao" class="form-control" value="{{$dado->formacao}}" placeholder="Ex: Ciência da Computação">
+                        </div>
+                        <!-- Especialização -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Especialização (Pós)</label>
+                            <input type="text" name="especializacao" class="form-control" value="{{$dado->especializacao}}" placeholder="Ex: Banco de dados">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Carga Horária Diária -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Carga Horária Diária *</label>
+                            <select name="cargaHoraria" class="form-select">
+                                <option value="4">4 horas</option>
+                                <option value="6">6 horas</option>
+                                <option value="8" selected>8 horas</option>
+                            </select>
+                        </div>
+
+                        <!-- Turno de Trabalho -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Turno *</label>
+                            <select name="turno" class="form-select" required>
+                                <option value="">Selecione o turno</option>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
+                                <option value="integral">Integral</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Carga Horária Diária -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Data de Cadastro</label>
+                            <input type="text" class="form-control" value="{{$dado->}}" readonly>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Status</label>
+                            <select name="status" class="form-select">
+                                <option value="ativo" selected>Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer border-0 filter-tabs mt-3 gap-3">
+                    <button type="button" class="btn btn-danger text-white px-4" data-bs-toggle="modal"
+                        data-bs-target="#modalExcluirDocentes">
+                        Excluir
+                    </button>
+                    <button type="submit" class="btn btn-warning text-white px-4">
+                        Salvar
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalExcluirDocentes" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja excluir o compromisso: {{$dado->nome}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Não</button>
+                                <a type="button" class="btn btn-danger" href="/excluir/{{$dado->id}}">Sim</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </section>
+    </div>
+</x-layout>

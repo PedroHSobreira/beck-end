@@ -1,0 +1,170 @@
+<x-layout titulo="Editar Cursos - Senac">
+    <div class="container-xl py-4 shadow">
+        <!-- Abas -->
+        <ul class="nav nav-pills gap-2 mb-4">
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/dashboardAdm"><i class="bi bi-speedometer2 me-1"></i>
+                    Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary active" href="/cursos"><i class="bi bi-clipboard2-check me-1"></i>
+                    Cursos</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary " href="/unidadesCurriculares"><i class="bi bi-people me-1"></i> UCs</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/docentes"><i class="bi bi-calendar2-event me-1"></i> Docentes</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/alunos"><i class="bi bi-graph-up-arrow me-1"></i> Alunos</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/turmas"><i class="bi bi-graph-up-arrow me-1"></i> Turmas</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary" href="/relatorios"><i class="bi bi-graph-up-arrow me-1"></i>
+                    Relatórios</a>
+            </li>
+        </ul>
+
+        <!-- Conteúdo principal -->
+        <section class="container-fluid">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex align-items-center justify-content-between  mb-3">
+                <div>
+                    <h2 class="fw-bold">Cursos</h2>
+                    <p class="text-muted">Editar e gerenciar cursos disponíveis</p>
+                </div>
+                <a href="/cursos" class="text-end btn btn-primary">
+                    <i class="bi bi-arrow-left me-1"></i> Voltar
+                </a>
+            </div>
+
+            <form action="/atualizarCurso/{{ $dado->id }}" method="POST">
+                @csrf
+            
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Nome -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Nome do Curso *</label>
+                            <input type="text" id="name" name="nome" class="form-control" value="{{$dado->nome}}"
+                                required>
+                        </div>
+
+                        <!-- Tipo -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Tipo *</label>
+                            <select name="tipo" id="tipo" class="form-select" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="tecnico">Técnico</option>
+                                <option value="graduacao">Graduação</option>
+                                <option value="livre">Curso Livre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Carga Horária -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Carga Horária (horas) *</label>
+                            <input type="number" name="cargaHoraria" id="cargaHoraria" class="form-control"
+                                value="{{$dado->cargaHoraria}}" required>
+                        </div>
+
+                        <!-- Horário -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Horário *</label>
+                            <input type="text" name="horario" id="horario" class="form-control"
+                                placeholder="08:00 - 12:00" value="{{$dado->horario}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Data Início -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Data de Início *</label>
+                            <input type="date" name="dataInicio" id="dataInicio" class="form-control"
+                                value="{{$dado->dataInicio}}" required>
+                        </div>
+                        
+                        <!-- Preço -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Preço (R$) *</label>
+                            <input type="number" name="preco" id="preco" class="form-control" min="0" step="0.01"
+                                value="{{$dado->preco}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Vagas -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Número de Vagas *</label>
+                            <input type="number" name="vagas" id="vagas" class="form-control" min="0"
+                                value="{{$dado->vagas}}" required>
+                        </div>
+
+                        <!-- Bolsas -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Bolsas de Estudo</label>
+                            <input type="number" name="bolsas" id="bolsas" class="form-control" min="0"
+                                value="{{$dado->bolsas}}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Status -->
+                        <div class="col">
+                            <label class="form-label fw-semibold">Status</label>
+                            <select name="situacao" class="form-select">
+                                <option value="ativo" selected>Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer border-0 filter-tabs mt-3 gap-3">
+                    <button type="button" class="btn btn-danger text-white px-4" data-bs-toggle="modal" data-bs-target="#modalExcluirCurso">
+                        Excluir
+                    </button>
+                    <button type="submit" class="btn btn-warning text-white px-4">
+                        Salvar
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalExcluirCurso" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja excluir o compromisso: {{$dado->nome}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Não</button>
+                                <a type="button" class="btn btn-danger" href="/excluirCurso/{{$dado->id}}">Sim</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </section>
+    </div>
+</x-layout>
